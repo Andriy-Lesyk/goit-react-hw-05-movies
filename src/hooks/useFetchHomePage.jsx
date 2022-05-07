@@ -16,7 +16,12 @@ export const useFetchHomePage = () => {
         );
       })
       .then(response => {
-        setMovies(() => [...response.results]);
+        const hits = response.results.map(({ title, id, name }) => ({
+          title,
+          id,
+          name,
+        }));
+        setMovies(() => [...hits]);
       });
   }, []);
 

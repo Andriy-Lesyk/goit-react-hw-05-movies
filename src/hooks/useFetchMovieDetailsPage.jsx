@@ -17,8 +17,10 @@ export const useFetchMovieDetailsPage = () => {
           new Error(`По Вашому запиту нічого не знайдено!`)
         );
       })
-      .then(response => {
-        setMovie(() => ({ ...response }));
+      .then(({ title, genres, vote_average, poster_path, overview }) => {
+        setMovie(() => ({
+          ...{ title, genres, vote_average, poster_path, overview },
+        }));
       });
   }, [movieId]);
   return movie;

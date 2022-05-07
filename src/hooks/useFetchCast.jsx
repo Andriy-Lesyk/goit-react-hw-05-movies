@@ -19,7 +19,13 @@ export const useFetchCast = ()=>{
         );
       })
       .then(response => {
-        setActors(() => [...response.cast]);
+        const hits = response.cast.map(({ profile_path, id, character, name }) => ({
+          profile_path,
+          id,
+          character,
+          name
+        }));
+        setActors(() => [...hits]);
       });
   }, [movieId]);
 

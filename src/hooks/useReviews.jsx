@@ -18,7 +18,12 @@ export const useReviews = () => {
         );
       })
       .then(response => {
-        setRevievs(() => [...response.results]);
+        const hits = response.results.map(({ author, id, content }) => ({
+          author,
+          id,
+          content,
+        }));
+        setRevievs(() => [...hits]);
       });
   }, [movieId]);
 

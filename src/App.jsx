@@ -1,21 +1,21 @@
 import { Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import Layout from 'components/Layout/Layout';
-
+import { NotFoundPage } from './pages/NotFoundPage';
 
 const HomePage = lazy(() =>
-  import('./HomePage/HomePage' /* webpackChunkName: "HomePage"*/)
+  import('./pages/HomePage/HomePage' /* webpackChunkName: "HomePage"*/)
 );
 const Reviews = lazy(() =>
-  import('./Reviews/Reviews' /* webpackChunkName: "Reviews"*/)
+  import('./pages/Reviews/Reviews' /* webpackChunkName: "Reviews"*/)
 );
-const Cast = lazy(() => import('./Cast/Cast' /* webpackChunkName: "Cast"*/));
+const Cast = lazy(() => import('./pages/Cast/Cast' /* webpackChunkName: "Cast"*/));
 const MoviesPage = lazy(() =>
-  import('./MoviesPage/MoviesPage' /* webpackChunkName: "MoviesPage"*/)
+  import('./pages/MoviesPage/MoviesPage' /* webpackChunkName: "MoviesPage"*/)
 );
 const MovieDetailsPage = lazy(() =>
   import(
-    './MovieDetailsPage/MovieDetailsPage' /* webpackChunkName: "MovieDetailsPage"*/
+    './pages/MovieDetailsPage/MovieDetailsPage' /* webpackChunkName: "MovieDetailsPage"*/
   )
 );
 
@@ -32,6 +32,7 @@ export const App = () => {
             <Route path="reviews" element={<Reviews />} />
           </Route>
         </Route>
+        <Route path="*" element={<NotFoundPage/>}/>
       </Routes>
       </Suspense>
     </div>

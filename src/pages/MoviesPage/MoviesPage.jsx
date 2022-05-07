@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import {
   SearchForm,
   SearchFormButton,
@@ -39,7 +38,12 @@ function MoviesPage() {
         );
       })
       .then(response => {
-        setRespArray(() => [...response.results]);
+        const hits = response.results.map(({ title, id, name }) => ({
+          title,
+          id,
+          name,
+        }));
+        setRespArray(() => [...hits]);
       });
   }, [search]);
 
@@ -57,10 +61,10 @@ function MoviesPage() {
       </SearchForm>
       {respArray && (
         <ul>
-          {respArray.map(movie => (
-            <li key={movie.id}>
-              <Link to={`${movie.id}'`}>
-                {movie.title ? movie.title : movie.name}
+          {respArray.map(({title, name, id}) => (
+            <li key={id}>
+              <Link to={`${id}'`}>
+                {title ? title : name}
               </Link>
             </li>
           ))}
@@ -69,16 +73,5 @@ function MoviesPage() {
     </div>
   );
 }
-
-MoviesPage.propTypes = {
-  search: PropTypes.string,
-  respArray: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string,
-      title: PropTypes.string,
-    })
-  ),
-};
 
 export default MoviesPage;

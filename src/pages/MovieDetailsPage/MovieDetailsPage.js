@@ -1,31 +1,30 @@
 import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { Div, Links, Description } from './MovieDetailsPage.styles';
 import { useFetchMovieDetailsPage } from '../../hooks/useFetchMovieDetailsPage';
 
 function MovieDetailsPage() {
-  const movie = useFetchMovieDetailsPage();
+  const { title, vote_average, poster_path, overview, genres } =
+    useFetchMovieDetailsPage();
 
   return (
     <div>
       <Div>
         <div>
           <img
-            src={`https://image.tmdb.org/t/p/w400${movie.poster_path}`}
+            src={`https://image.tmdb.org/t/p/w400${poster_path}`}
             width="250px"
             alt={'Poster'}
           />
         </div>
         <Description>
-          <h2>{movie.title}</h2>
-          <p>User score: {movie.vote_average}</p>
+          <h2>{title}</h2>
+          <p>User score: {vote_average}</p>
           <h4>Overview</h4>
-          <p>{movie.overview}</p>
+          <p>{overview}</p>
           <h4>Genres</h4>
           <ul>
-            {movie.genres &&
-              movie.genres.map(genre => <li key={genre.id}>{genre.name}</li>)}
+            {genres && genres.map(({ id, name }) => <li key={id}>{name}</li>)}
           </ul>
         </Description>
       </Div>
@@ -39,17 +38,4 @@ function MovieDetailsPage() {
   );
 }
 
-MovieDetailsPage.propTypes = {
-  movie: PropTypes.object,
-  poster_path: PropTypes.string,
-  title: PropTypes.string,
-  vote_average: PropTypes.number,
-  overview: PropTypes.string,
-  genres: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-    })
-  ),
-};
 export default MovieDetailsPage;
