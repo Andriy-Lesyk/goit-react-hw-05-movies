@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   SearchForm,
   SearchFormButton,
@@ -10,6 +10,8 @@ import {
 function MoviesPage() {
   const [search, setSearch] = useState('');
   const [respArray, setRespArray] = useState([]);
+  const location = useLocation()
+
 
   const handleChange = event => {
     setSearch(event.currentTarget.value);
@@ -63,7 +65,7 @@ function MoviesPage() {
         <ul>
           {respArray.map(({title, name, id}) => (
             <li key={id}>
-              <Link to={`${id}'`}>
+              <Link to={{ pathname: `${id}`, state: {location}}}>
                 {title ? title : name}
               </Link>
             </li>

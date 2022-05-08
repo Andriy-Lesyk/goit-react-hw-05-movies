@@ -1,16 +1,24 @@
 import React from 'react';
-import { Outlet, Link } from 'react-router-dom';
-import { Div, Links, Description } from './MovieDetailsPage.styles';
+import { Outlet, Link, useNavigate } from 'react-router-dom';
+import { Div, Links, Description, Btn, Arrow } from './MovieDetailsPage.styles';
 import { useFetchMovieDetailsPage } from '../../hooks/useFetchMovieDetailsPage';
 
-function MovieDetailsPage() {
+export default function MovieDetailsPage() {
+  const navigate = useNavigate();
   const { title, vote_average, poster_path, overview, genres } =
     useFetchMovieDetailsPage();
+ 
+  const onGoBack = () => {
+    navigate(-1);
+  };
 
   return (
     <div>
       <Div>
         <div>
+          <Btn type="button" onClick={onGoBack}>
+            <Arrow /> Go back
+          </Btn>
           <img
             src={`https://image.tmdb.org/t/p/w400${poster_path}`}
             width="250px"
@@ -37,5 +45,3 @@ function MovieDetailsPage() {
     </div>
   );
 }
-
-export default MovieDetailsPage;

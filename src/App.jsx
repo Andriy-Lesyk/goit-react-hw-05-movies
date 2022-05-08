@@ -1,7 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import Layout from 'components/Layout/Layout';
-import { NotFoundPage } from './pages/NotFoundPage';
+import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
+import AppBar from 'components/AppBar/AppBar';
 
 const HomePage = lazy(() =>
   import('./pages/HomePage/HomePage' /* webpackChunkName: "HomePage"*/)
@@ -22,6 +23,7 @@ const MovieDetailsPage = lazy(() =>
 export const App = () => {
   return (
     <div>
+      <AppBar/>
       <Suspense fallback={<h1>Загружаем...</h1>}>
       <Routes>
         <Route path="/" element={<Layout />}>
