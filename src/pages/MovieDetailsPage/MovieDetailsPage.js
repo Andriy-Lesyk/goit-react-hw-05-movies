@@ -9,7 +9,7 @@ export default function MovieDetailsPage() {
     useFetchMovieDetailsPage();
  
   const onGoBack = () => {
-    navigate(-1);
+    navigate('/movies');
   };
 
   return (
